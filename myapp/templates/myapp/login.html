@@ -1,0 +1,58 @@
+{% extends 'myapp/header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		td
+		{
+			padding: 10px;
+		}
+	</style>
+</head>
+<body>
+{% if not request.session.userpk %}
+{% if error %}
+	<center><b>{{error}}</b></center>
+{% endif %}
+{% if error1 %}
+	<center><b>{{error1}}
+	<br>
+	{{pk}}
+	Click <a href="{% url 'resend_otp' pk=pk %}">Here</a> To Activate Your Account
+	</b></center>
+{% endif %}
+<form name="login" method="post" action="{% url 'login_user' %}">
+	{% csrf_token %}
+	<table align="center">
+		
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="email" value="{{u.email}}"></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" name="submit" value="Login">
+			</td>
+		</tr>
+	</table>
+</form>
+<center>
+	 Still Not Registered? Click <a href="{% url 'signup' %}">Here </a> To Signup
+	<b>
+{% if msg %}
+	{{msg}}
+	<br>
+	<a href="{% url 'activate' %}">Click Here To Activate</a>
+{% endif %}
+	</b>
+</center>
+{% endif %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'myapp/header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+{% block content %}
+<center>
+<form method="POST" action="{% url 'submit_contact' %}">
+	{% csrf_token %}
+
+	<table align="center">
+		
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="name" value="{{user.fname}}"></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="email" value="{{user.email}}"></td>
+		</tr>
+		<tr>
+			<td>Mobile</td>
+			<td><input type="text" name="mobile" value="{{user.mobile}}"></td>
+		</tr>
+		<tr>
+			<td>Remarks</td>
+			<td><textarea rows="5" cols="22" name="remarks"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<button type="submit" class="save btn btn-default">Save</button>
+			</td>
+		</tr>
+	</table>
+    
+</form>
+</center>
+<hr>
+{% if contacts %}
+	{% for c in contacts %}
+		<h3>&nbsp;&nbsp;&nbsp;{{c.name}}</h3>
+		<p><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{c.remarks}}</h4></p>
+		<hr>
+	{% endfor %}
+{% endif %}
+{% endblock %}
+</body>
+</html>

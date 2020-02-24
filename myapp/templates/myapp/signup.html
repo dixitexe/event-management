@@ -1,0 +1,63 @@
+{% extends 'myapp/header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		td
+		{
+			padding: 10px;
+		}
+	</style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<body>
+{% if not request.session.userpk %}
+{% if error %}
+	<center><b>{{error}}</b></center>
+{% endif %}
+<form name="signup" method="post" action="{% url 'signup_user' %}">
+	{% csrf_token %}
+	<table align="center">
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="fname" value="{{u.fname}}"></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="lname" value="{{u.lname}}"></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="email" value="{{u.email}}"></td>
+		</tr>
+		<tr>
+			<td>Mobile</td>
+			<td><input type="text" name="mobile" value="{{u.mobile}}"></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password"></td>
+		</tr>
+		<tr>
+			<td>Confirm Password</td>
+			<td><input type="password" name="cpassword"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" name="submit" value="Sign Up">
+			</td>
+		</tr>
+	</table>
+</form>
+<center>
+	Already Registered? Click <a href="{% url 'login' %}">Here </a> To Login
+</center>
+{% endif %}
+</body>
+</html>
+
+{% endblock %}
